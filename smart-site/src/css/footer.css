@@ -1,0 +1,34 @@
+.footer {
+    background-color: #EB9E6B;
+    min-height: 20vh;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+.footer > div {
+    font-weight: 600;
+    color: black;
+}
+.footer a {
+    display: block;
+    color: white;
+}
+.footer a:hover {
+    color: white;
+}
+.footer-links {
+    width: max-content;
+    margin: 20px 40px;
+}
+.footer-address {
+    margin: 20px 4px;
+}
+.footer-address > div {
+    margin-bottom: 10px;
+}
+.footer-address > p {
+    color: white;
+    line-height: 0.5;
+}
