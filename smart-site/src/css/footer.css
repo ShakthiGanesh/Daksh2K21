@@ -1,22 +1,30 @@
+:root{
+    --faded-font:rgb(238, 238, 238);
+    --white-font:white;
+    --dark-brown-bg:#d38450;
+}
+
 .footer {
-    background-color: #EB9E6B;
+    background-color: var(--dark-brown-bg);
     min-height: 20vh;
     position: absolute;
     bottom: 0;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    font-weight: 400;
 }
 .footer > div {
-    font-weight: 600;
     color: black;
 }
 .footer a {
     display: block;
-    color: white;
+    color: var(--faded-font);
 }
 .footer a:hover {
-    color: white;
+    color: var(--white-font);
 }
 .footer-links {
     width: max-content;
@@ -29,6 +37,9 @@
     margin-bottom: 10px;
 }
 .footer-address > p {
-    color: white;
+    color: var(--faded-font);
     line-height: 0.5;
+}
+.footer-title{
+    font-weight: 600;
 }

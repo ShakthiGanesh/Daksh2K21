@@ -3,14 +3,14 @@ export function Footer() {
     return(
         <div class="footer">
             <div class="footer-links">
-            <div>Links</div>
-            <a href="/">Home</a>
-            <a href="/plans">Our Plans</a>
-            <a href="/contactus">Contact Us</a>
-            <a href="/about">About</a>
+                <div class="footer-title">Links</div>
+                <a href="/">Home</a>
+                <a href="/plans">Our Plans</a>
+                <a href="/contactus">Contact Us</a>
+                <a href="/about">About</a>
             </div>
             <div class="footer-address">
-                <div>Address</div>
+                <div class="footer-title">Address</div>
                 <p>SASTRA DEEMED UNIVERSITY</p>
                 <p> Tirumalaisamudram,</p>
                 <p>Thanjavur - 613401</p>   
