@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const User = require('./models/user');
 const bcrypt = require('bcrypt');
 
-const tokenizer = async data=>awaitjwt.sign({data},process.env.SECRET_KEY || 'secret_key',{expiresIn:5*60*60});
+const tokenizer = async data=>await jwt.sign({data},process.env.SECRET_KEY || 'secret_key',{expiresIn:5*60*60});
 
 module.exports.authChecker = (req,res,next)=>{
     const token = Cookie.jwt;
@@ -34,12 +34,12 @@ module.exports.loginVerification = async (req,res,next)=>{
             next(user.group);
         }
         else{  
-            res.status(401);
+            res.status(200);
             res.json({error:"Incorect password"});
         }
     }
     else{
-        res.status(401);
+        res.status(200);
         res.json({error:'User not found'});
     }
 }
