@@ -1,0 +1,32 @@
+:root{
+    --faded-font:rgb(238, 238, 238);
+    --white-font:white;
+    --dark-brown-bg:#d38450;
+}
+.signin {
+    width: 400px;
+    margin: 100px auto;
+}
+
+.btn-custom {
+    background-color: var(--dark-brown-bg);
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: white;
+    color: var(--dark-brown-bg);
+    border: 2px solid var(--dark-brown-bg);
+}
+
+.signin div {
+    font-family: "Ink free";
+    color: #5C3114;
+    font-weight: 600;
+}
+
+#signin-header {
+    width: max-content;
+    margin: 0 auto;
+    font-size: 30px;
+}
