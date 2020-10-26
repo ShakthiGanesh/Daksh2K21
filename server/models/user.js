@@ -10,6 +10,7 @@ const userModel = new Schema({
     _id : Schema.Types.ObjectId,
     email : String,
     password : String,
+    group: String,
     extra : Object
 },{collation:'user'});
 

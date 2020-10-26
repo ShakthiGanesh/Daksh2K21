@@ -8,12 +8,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
-app.post('/login',loginVerification,(req,res)=>{
-    res.send("authenticated");
+app.post('/login',loginVerification,(group,req,res)=>{
+    res.status(200);
+    res.json({group:group,isAuthenticated:true});
 });
 
-app.post('/checkAuth',authChecker,(req,res)=>{
-    res.send("authenticated");
+app.get('/checkAuth',authChecker,(group, req,res)=>{
+    res.status(200);
+    res.json({group:group,isAuthenticated:true});
 });
 
 app.listen(process.env.PORT || 3000);
