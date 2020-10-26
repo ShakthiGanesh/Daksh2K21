@@ -5,6 +5,8 @@ import {baseURL} from '../public/baseURL';
 // pass in component , path and locationTo and locationFrom are optional parameters
 // to keep track of user's desired location 
 
+// example usage "<ProtectedRoute path = "/admin" group="admin" component={adminPage}/>"
+
 export default function ProtectedRoute(props){
     fetch(baseURL+'/checkAuth',{
         method: 'GET',
