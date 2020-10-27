@@ -19,4 +19,4 @@ userModel.pre('save',async next=>{
     next();
 })
 
-module.exports = mongoose.model('user',userModel);
+module.exports = mongoose.model('User',userModel);
