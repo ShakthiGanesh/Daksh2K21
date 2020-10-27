@@ -1,6 +1,6 @@
-import { Nav, Navbar } from "react-bootstrap"
+import { Nav, Navbar } from "react-bootstrap";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import "../css/header.css"
+import "../css/header.css";
 
 function Header () {
     const path = document.location.pathname

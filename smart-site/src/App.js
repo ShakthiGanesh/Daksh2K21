@@ -11,7 +11,10 @@ import { Customer } from './components/customer';
 function App() {
   return (
     <div className="App">
+<<<<<<< HEAD
+=======
       
+>>>>>>> 30c93e3e3e857c976021d4d968cca16cdaf8fd4a
       <Route path="/" exact>
         <Header />
         <Home />
@@ -22,10 +25,18 @@ function App() {
         <SignIn />
         <Footer />
       </Route>
+<<<<<<< HEAD
       <Route path="/customer" exact>
         <Customer />
+=======
+<<<<<<< HEAD
+=======
+      <Route path="/admin" exact>
+        <Admin />
+>>>>>>> 4cd0917ea5a3e0512a824ae27df997d79e88b375
       </Route>
       
+>>>>>>> 30c93e3e3e857c976021d4d968cca16cdaf8fd4a
     </div>
   );
 }
