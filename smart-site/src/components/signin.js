@@ -8,7 +8,7 @@ export function SignIn () {
             <Form>
                 <Form.Group controlId="formGroupEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" required/>
+                    <Form.Control type="email" placeholder="Enter email" required autoFocus/>
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
                     <Form.Label>Password</Form.Label>
