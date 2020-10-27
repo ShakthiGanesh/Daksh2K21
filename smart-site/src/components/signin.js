@@ -55,11 +55,8 @@ export function SignIn () {
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formGroupEmail">
                     <Form.Label>Email address</Form.Label>
-<<<<<<< HEAD
                     <Form.Control type="email" placeholder="Enter email" required onChange={e=>setEmail(e.target.value)}/>
-=======
                     <Form.Control type="email" placeholder="Enter email" required autoFocus/>
->>>>>>> 30c93e3e3e857c976021d4d968cca16cdaf8fd4a
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
                     <Form.Label>Password</Form.Label>
