@@ -6,18 +6,26 @@ import { Route } from 'react-router-dom';
 import { SignIn } from './components/signin';
 import Header from './components/header';
 import { Footer } from './components/footer';
+import { Admin } from './components/admin';
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      
       <Route path="/" exact>
+        <Header />
         <Home />
+        <Footer />
       </Route>
       <Route path="/signin" exact>
+        <Header />
         <SignIn />
+        <Footer />
       </Route>
-      <Footer />
+      <Route path="/admin" exact>
+        <Admin />
+      </Route>
+      
     </div>
   );
 }
