@@ -1,3 +1,36 @@
+
+
 .progressClass {
     margin: 40px;
 }
+
+.progress-circular {
+    width: fit-content;
+    margin: 30px auto;
+}
+
+.progress-circular h5 {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 7px;
+    color: #5C3114;
+    font-size: 30px;
+    text-shadow: 1px 1px #d38450;
+}
+
+.progress-linear {
+    box-sizing: border-box;
+    padding: 20px;
+    min-width: 250px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.progress-linear  h5 {
+    padding: 7px;
+    font-size: larger;
+    color: #5C3114;
+    text-shadow: 1px 1px #d38450;
+}
+
