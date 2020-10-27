@@ -1,12 +1,12 @@
 import React from 'react'
 import { ProgressCircular, ProgressLinear } from './progress'
-import '../css/admin.css'
-import { AdminHeader } from './admin-header'
+import '../css/customer.css'
+import { CustomerHeader } from './customer-header'
 
-export function Admin () {
+export function Customer () {
     return(
         <div className="admin">
-            <AdminHeader />
+            <CustomerHeader />
             <h2>Happy to see you Again :-)</h2>
             <div className="admin-body">
             <div style={{flex: '0.5'}}>

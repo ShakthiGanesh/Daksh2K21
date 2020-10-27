@@ -2,9 +2,9 @@ import React from 'react'
 import { Nav, Navbar } from "react-bootstrap"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import  ForumIcon from '@material-ui/icons/Forum';
-import '../css/admin-header.css'
 
-export function AdminHeader() {
+
+export function CustomerHeader() {
     return (
         <div className='admin-header'>
              <Navbar expand="lg">

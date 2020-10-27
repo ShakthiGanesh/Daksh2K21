@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom';
 import { SignIn } from './components/signin';
 import Header from './components/header';
 import { Footer } from './components/footer';
-import { Admin } from './components/admin';
+import { Customer } from './components/customer';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         <Footer />
       </Route>
       <Route path="/customer" exact>
-        <Admin />
+        <Customer />
       </Route>
       
     </div>
