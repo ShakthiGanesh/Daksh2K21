@@ -10,14 +10,12 @@ import { Footer } from './components/footer';
 function App() {
   return (
     <div className="App">
-      <Header />
       <Route path="/" exact>
         <Home />
       </Route>
       <Route path="/signin" exact>
         <SignIn />
       </Route>
-      <Footer />
     </div>
   );
 }
