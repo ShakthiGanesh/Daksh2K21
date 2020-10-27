@@ -22,7 +22,7 @@ function App() {
         <SignIn />
         <Footer />
       </Route>
-      <Route path="/admin" exact>
+      <Route path="/customer" exact>
         <Admin />
       </Route>
       

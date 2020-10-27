@@ -1,10 +1,9 @@
 import React from 'react'
 import '../css/signin.css'
-import { Button, Form } from 'react-bootstrap
+import { Button, Form } from 'react-bootstrap'
 export function SignIn () {
     return(
-        <React.Fragment>
-        <Header />
+        <div>
         <div class="signin">
             <div id='signin-header'>Sign In</div>
             <Form>
@@ -21,7 +20,6 @@ export function SignIn () {
                 </Button>
             </Form>
         </div>
-        <Footer />
-        </React.Fragment>
+        </div>
     )
 }
