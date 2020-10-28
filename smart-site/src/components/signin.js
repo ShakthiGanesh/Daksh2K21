@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React from 'react'
-import '../css/signin.css'
-import { Button, Form } from 'react-bootstrap'
-=======
+
 import React , {useState} from 'react';
 import '../css/signin.css';
 import { Button, Form } from 'react-bootstrap';
@@ -12,7 +8,7 @@ import {BaseURL} from '../public/baseURL';
 import {Redirect, Route} from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
 
->>>>>>> 4cd0917ea5a3e0512a824ae27df997d79e88b375
+
 export function SignIn () {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -54,14 +50,11 @@ export function SignIn () {
         event.preventDefault();
     }
     return(
-<<<<<<< HEAD
-        <div>
-        <div class="signin">
-=======
+
         <React.Fragment>
         <Header />
         <div className="signin">
->>>>>>> 4cd0917ea5a3e0512a824ae27df997d79e88b375
+
             <div id='signin-header'>Sign In</div>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formGroupEmail">
@@ -78,6 +71,6 @@ export function SignIn () {
                 </Button>
             </Form>
         </div>
-        </div>
+        </React.Fragment>
     )
 }

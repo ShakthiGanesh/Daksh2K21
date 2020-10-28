@@ -1,17 +1,31 @@
-.admin-body {
+.customer-body {
     display: flex;
 }
 
 @media (max-width:1007px) {
-    .admin-body {
+    .customer-body {
         display: block;
     } 
 }
 
-.admin h2 {
+.customer>h2 {
     width: fit-content;
     margin: 20px auto;
     font-family: 'Ink free';
     color:  #5C3114;
     text-shadow: 1.5px 1px #d38450;
 }
+
+.bot-style h2{
+    font-weight: 600;
+    font-family: 'Ink free';
+}
+
+.bot-style {
+    background-color: #d38450;
+}
+
+
+
+
+  
