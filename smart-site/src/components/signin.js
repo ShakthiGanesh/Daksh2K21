@@ -52,15 +52,14 @@ export function SignIn () {
     return(
 
         <React.Fragment>
-        <Header />
+        
         <div className="signin">
 
             <div id='signin-header'>Sign In</div>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formGroupEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" required onChange={e=>setEmail(e.target.value)}/>
-                    <Form.Control type="email" placeholder="Enter email" required autoFocus/>
+                    <Form.Control type="email" placeholder="Enter email" required onChange={e=>setEmail(e.target.value)} autofocus/>
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
                     <Form.Label>Password</Form.Label>

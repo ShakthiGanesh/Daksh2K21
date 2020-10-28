@@ -3,6 +3,7 @@ import { ProgressCircular, ProgressLinear } from './progress'
 import '../css/customer.css'
 import { CustomerHeader } from './customer-header'
 import ChatBot from 'react-simple-chatbot'
+import { Footer } from './footer'
 
 var temp = null;
 const steps = [
@@ -114,8 +115,7 @@ export function Customer () {
              <ChatBot  floating={true} className="bot-style" headerTitle='Help'  opened={false}
              steps={steps} speechSynthesis={{enable: true }}/> 
              </div>
-            
-            
+            <Footer />
         </div>
         
     )
