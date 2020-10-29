@@ -11,7 +11,6 @@ import { Customer } from './components/customer';
 function App() {
   return (
     <div className="App">
-      
       <Route path="/" exact>
         <Header />
         <Home />

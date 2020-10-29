@@ -16,6 +16,8 @@ const departmentModel = Schema({
         ref : 'Work'
     }],
 
+},{
+    collection:"departments"
 });
 
 module.exports  = mongoose.model("Department",departmentModel);

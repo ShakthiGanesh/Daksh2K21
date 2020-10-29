@@ -15,6 +15,8 @@ const teamModel = Schema({
         type : Schema.Types.ObjectId,
         ref : "User"
     }]
+},{
+    collection:"teams"
 });
 
 module.exports = mongoose.model("Team",teamModel);

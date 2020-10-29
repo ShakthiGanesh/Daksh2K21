@@ -3,19 +3,23 @@ const Schema = mongoose.Schema;
 
 const workModel = Schema({
     _id : Schema.Types.ObjectId,
-    name : {type:String,required:true},
-    department : {
+    work : {
         type:Schema.Types.ObjectId,
-        ref : "Department"
+        ref:'WorkTemplate',
+        required:true},
+    user : {
+        type:Schema.Types.ObjectId,
+        ref:'User'
     },
     updates:Object, // types of objects inside this can be mixed 
                     // a seperate handler will be used to parse the data
                     // every object inside this field should be set along with its type
-    expectedDuration : String,
-    status : Object,
+    expectedDuration : Date,
+    status : Boolean,
     expense : String
 },{
-    timestamps:true
+    timestamps:true,
+    collection:'works'
 });
 
 module.exports = mongoose.model('Work', workModel);

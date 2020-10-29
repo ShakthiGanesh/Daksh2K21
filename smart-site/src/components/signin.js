@@ -2,8 +2,6 @@
 import React , {useState} from 'react';
 import '../css/signin.css';
 import { Button, Form } from 'react-bootstrap';
-import Header from './header';
-import {Footer} from './footer';
 import {BaseURL} from '../public/baseURL';
 import {Redirect, Route} from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
@@ -12,6 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 export function SignIn () {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [auth,setAuth] = useState(false);
     function handleSubmit(event){
         fetch(BaseURL + '/login',{
             method:'POST',
@@ -33,13 +32,7 @@ export function SignIn () {
         })
         .then(data=>{
             if(data.isAuthenticated){
-                return(
-                    <Route 
-                    render={()=>(<Redirect to={{
-                        pathname:'/'
-                    }}/>)}
-                    />
-                );
+                setAuth(true);
             }
             else
                 return(<Alert severity="warning">{data.message}</Alert>)
@@ -49,10 +42,16 @@ export function SignIn () {
         ));
         event.preventDefault();
     }
+<<<<<<< HEAD
+    if(!auth){
+        return(
+        <React.Fragment>
+=======
     return(
 
         <React.Fragment>
         
+>>>>>>> 4f832fad24923dcb527ff968db0ff94ebbbb25e5
         <div className="signin">
 
             <div id='signin-header'>Sign In</div>
@@ -71,5 +70,17 @@ export function SignIn () {
             </Form>
         </div>
         </React.Fragment>
-    )
+    )}
+    else if(auth){
+        return(
+            <Route
+                render = {()=>(
+                    <Redirect to={{
+                        pathname:'/'
+                    }}/>
+                )}
+            />
+        )
+    }
+
 }
