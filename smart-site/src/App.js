@@ -12,7 +12,6 @@ import { Plans } from './components/plans';
 function App() {
   return (
     <div className="App">
-      
       <Route path="/" exact>
         <Header />
         <Home />
