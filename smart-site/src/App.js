@@ -7,6 +7,7 @@ import { SignIn } from './components/signin';
 import Header from './components/header';
 import { Footer } from './components/footer';
 import { Customer } from './components/customer';
+import { Plans } from './components/plans';
 
 function App() {
   return (
@@ -20,6 +21,11 @@ function App() {
       <Route path="/signin" exact>
         <Header />
         <SignIn />
+        <Footer />
+      </Route>
+      <Route path='/plans' exact>
+        <Header />
+        <Plans />
         <Footer />
       </Route>
       <Route path="/customer" exact>
