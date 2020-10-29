@@ -7,14 +7,12 @@ import { SignIn } from './components/signin';
 import Header from './components/header';
 import { Footer } from './components/footer';
 import { Admin } from './components/admin';
+import CreateWork from './components/workForm';
+import CreateDepartment from './components/departmentForm';
 
 function App() {
   return (
     <div className="App">
-<<<<<<< HEAD
-=======
-      
->>>>>>> 30c93e3e3e857c976021d4d968cca16cdaf8fd4a
       <Route path="/" exact>
         <Header />
         <Home />
@@ -25,13 +23,6 @@ function App() {
         <SignIn />
         <Footer />
       </Route>
-<<<<<<< HEAD
-=======
-      <Route path="/admin" exact>
-        <Admin />
-      </Route>
-      
->>>>>>> 30c93e3e3e857c976021d4d968cca16cdaf8fd4a
     </div>
   );
 }
