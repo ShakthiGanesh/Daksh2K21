@@ -1,9 +1,11 @@
+
 import React , {useState} from 'react';
 import '../css/signin.css';
 import { Button, Form } from 'react-bootstrap';
 import {BaseURL} from '../public/baseURL';
 import {Redirect, Route} from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
+
 
 export function SignIn () {
     const [email,setEmail] = useState('');
@@ -40,16 +42,23 @@ export function SignIn () {
         ));
         event.preventDefault();
     }
+<<<<<<< HEAD
     if(!auth){
         return(
         <React.Fragment>
+=======
+    return(
+
+        <React.Fragment>
+        
+>>>>>>> 4f832fad24923dcb527ff968db0ff94ebbbb25e5
         <div className="signin">
+
             <div id='signin-header'>Sign In</div>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formGroupEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" required onChange={e=>setEmail(e.target.value)}/>
-                    <Form.Control type="email" placeholder="Enter email" required autoFocus/>
+                    <Form.Control type="email" placeholder="Enter email" required onChange={e=>setEmail(e.target.value)} autofocus/>
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
                     <Form.Label>Password</Form.Label>
