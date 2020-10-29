@@ -7,7 +7,7 @@
 .footer {
     background-color: var(--dark-brown-bg);
     min-height: 20vh;
-    position: absolute;
+    position: static;
     bottom: 0;
     width: 100vw;
     display: flex;
