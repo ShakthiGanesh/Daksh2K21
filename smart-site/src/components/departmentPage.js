@@ -15,7 +15,6 @@ import {
     Divider,
     Button
 } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {BaseURL} from '../pubic/baseURL';
 import CreateWork from './workForm';
 
