@@ -42,16 +42,9 @@ export function SignIn () {
         ));
         event.preventDefault();
     }
-<<<<<<< HEAD
     if(!auth){
-        return(
+        return( 
         <React.Fragment>
-=======
-    return(
-
-        <React.Fragment>
-        
->>>>>>> 4f832fad24923dcb527ff968db0ff94ebbbb25e5
         <div className="signin">
 
             <div id='signin-header'>Sign In</div>
