@@ -1,5 +1,6 @@
 import { Nav, Navbar } from "react-bootstrap";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { Wave } from 'react-animated-text'
 import "../css/header.css";
 
 function Header () {
@@ -7,7 +8,9 @@ function Header () {
     console.log(path);
     return(
         <Navbar expand="lg">
-        <Navbar.Brand href="/" id="navbar-brand">PS Constructions</Navbar.Brand>
+        <Navbar.Brand href="/" id="navbar-brand" >
+        <Wave text="PS CONSTRUCTIONS" effect={"verticalFadeIn"} iterations={1}  effectChange={2.0}  effectDuration={0.5}/>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="nav">
