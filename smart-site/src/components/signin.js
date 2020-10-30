@@ -43,11 +43,17 @@ export function SignIn () {
         event.preventDefault();
     }
     if(!auth){
+<<<<<<< HEAD
         return(
 
             <React.Fragment>
             
             <div className="signin">
+=======
+        return( 
+        <React.Fragment>
+        <div className="signin">
+>>>>>>> 9da8aa1893e26407c2f4b0c3e438a523235b5dfa
 
                 <div id='signin-header'>Sign In</div>
                 <Form onSubmit={handleSubmit}>

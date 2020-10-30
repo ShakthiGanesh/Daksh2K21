@@ -8,7 +8,11 @@ import Header from './components/header';
 import { Footer } from './components/footer';
 import { Customer } from './components/customer';
 import { Plans } from './components/plans';
+<<<<<<< HEAD
 import Project from './components/projectPage';
+=======
+import Contact from './components/contact';
+>>>>>>> 9da8aa1893e26407c2f4b0c3e438a523235b5dfa
 
 function App() {
   return (
@@ -31,8 +35,15 @@ function App() {
       <Route path="/customer" exact>
         <Customer />
       </Route>
+<<<<<<< HEAD
       <Route path="/test" exact>
         <Project project_id="daf"/>
+=======
+      <Route path='/contactus'>
+        <Header />
+        <Contact />
+        <Footer />
+>>>>>>> 9da8aa1893e26407c2f4b0c3e438a523235b5dfa
       </Route>
       
     </div>
