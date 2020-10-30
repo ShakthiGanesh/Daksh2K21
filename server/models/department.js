@@ -7,13 +7,13 @@ const departmentModel = Schema({
         type : String,
         required: true
     },
-    employees : [{
+    managers : [{
         type : Schema.Types.ObjectId,
         ref : 'User'
     }],
     works : [{
         type : Schema.Types.ObjectId,
-        ref : 'Work'
+        ref : 'WorkTemplate'
     }],
 
 },{
