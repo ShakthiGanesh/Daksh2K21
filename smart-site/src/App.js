@@ -8,6 +8,7 @@ import Header from './components/header';
 import { Footer } from './components/footer';
 import { Customer } from './components/customer';
 import { Plans } from './components/plans';
+import Contact from './components/contact';
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
       </Route>
       <Route path="/customer" exact>
         <Customer />
+      </Route>
+      <Route path='/contactus'>
+        <Header />
+        <Contact />
+        <Footer />
       </Route>
       
     </div>
