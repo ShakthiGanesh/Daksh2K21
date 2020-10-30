@@ -7,7 +7,16 @@ const userModel = new Schema({
     email : String,
     password : String,
     group: String,
-    extra : Object
+    projects:[{
+        type:Schema.Types.ObjectId,
+        ref:"Project"
+    }],
+    staff_id : String,
+    department: {
+        type:Schema.Types.ObjectId,
+        ref:"Department"
+    },
+    mobile:Number
 },{collation:'users'});
 
 userModel.pre('save',async next=>{

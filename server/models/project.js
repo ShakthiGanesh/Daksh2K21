@@ -7,11 +7,11 @@ const projectModel = Schema({
         type: String,
         required: true
     },
-    team : {
+    staffs : [{
         type : Schema.Types.ObjectId,
-        ref : "Team"
-    },
-    user : {
+        ref : "User"
+    }],
+    customer : {
         type : Schema.Types.ObjectId,
         ref : "User"
     },

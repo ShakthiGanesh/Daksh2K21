@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const updateSchema = Schema({
+    _id: Schema.Types.ObjectId,
+    message:String,
+    image:String
+});
 const workModel = Schema({
     _id : Schema.Types.ObjectId,
     work : {
@@ -11,9 +16,11 @@ const workModel = Schema({
         type:Schema.Types.ObjectId,
         ref:'User'
     },
-    updates:Object, // types of objects inside this can be mixed 
-                    // a seperate handler will be used to parse the data
-                    // every object inside this field should be set along with its type
+    staff:{
+        type:Schema.Types.ObjectId,
+        ref:'User'
+    },
+    updates:[updateSchema],
     expectedDuration : Date,
     status : Boolean,
     expense : String

@@ -14,15 +14,29 @@ const workTemplate = Schema({
     collection:"work-template"
 });
 
-const galleryTemplate = Schema({
+const gallerySchema = Schema({
     _id : Schema.Types.ObjectId,
     title: String,
-    description : String
+    description : String,
+    image:String
 },{
-    collection:"gallery-template"
+    collection:"gallery"
+});
+
+const planSchema = Schema({
+    _id: Schema.Types.ObjectId,
+    name : String,
+    image : String,
+    works:[{
+        type:Schema.Types.ObjectId,
+        ref:"WorkTemplate"
+    }]
+},{
+    collection:'plans'
 });
 
 module.exports = {
     WorkTemplate: mongoose.model('WorkTemplate',workTemplate),
-    GalleryTemplate: mongoose.model("GalleryTemplate",galleryTemplate)
+    GalleryTemplate: mongoose.model("GalleryTemplate",gallerySchema),
+    PlanTemplate:mongoose.model('Plan',planSchema)
 };
