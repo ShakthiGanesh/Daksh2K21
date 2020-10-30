@@ -9,6 +9,8 @@ const Department = require('./models/department');
 const {WorkTemplate} = require('./models/templates');
 const Message = require('./models/message');
 const adminRoute = require('./routes/admin');
+const staffRoute = require('./route/staff');
+const commonRoute = require('./route/common');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
@@ -41,6 +43,8 @@ app.get('/getDept',(req,res)=>{
 });
 
 app.use('/admin',adminRoute);
+app.use('/staff',staffRoute);
+app.use('/common',commonRoute);
 
 io.on('connect',socket=>{
     console.log("New ws connection" + socket.id);

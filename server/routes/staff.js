@@ -80,4 +80,6 @@ router.post('/update',upload('update'),(req,res)=>{
             res.status(500).json(err);
         });
     });
-})
+});
+
+module.exports = router;

@@ -8,10 +8,14 @@ const updateSchema = Schema({
 });
 const workModel = Schema({
     _id : Schema.Types.ObjectId,
+    project:{
+        type:Schema.Types.ObjectId,
+        ref:'Project',
+    },
     work : {
         type:Schema.Types.ObjectId,
-        ref:'WorkTemplate',
-        required:true},
+        ref:'WorkTemplate'
+    },
     user : {
         type:Schema.Types.ObjectId,
         ref:'User'

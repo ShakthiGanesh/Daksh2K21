@@ -8,6 +8,7 @@ import Header from './components/header';
 import { Footer } from './components/footer';
 import { Customer } from './components/customer';
 import { Plans } from './components/plans';
+import Project from './components/projectPage';
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
       </Route>
       <Route path="/customer" exact>
         <Customer />
+      </Route>
+      <Route path="/test" exact>
+        <Project project_id="daf"/>
       </Route>
       
     </div>

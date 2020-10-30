@@ -4,6 +4,7 @@ const {WorkTemplate, Plan} = require('../models/templates');
 const User = require*'../models/user';
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const update = require('../aws');
 
 const router = Router();
 router.use(bodyParser.json());
@@ -135,9 +136,10 @@ router.route('/plan')
         })
         .catch(err=>res.status(500).json({error:err}));
     })
-    .post((res,req)=>{
+    .post(update.single('image'),(res,req)=>{
         Plan.update({_id:req.body._id},{$set:{
-            name: res.body.name
+            name: res.body.name,
+            image : res.file.location
         }})
         .then(()=>res.status(200).json({message:"Created plan"}))
         .catch(err=>res.status(500).json({error:err}));

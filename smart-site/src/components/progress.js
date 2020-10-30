@@ -4,8 +4,8 @@ import 'react-circular-progressbar/dist/styles.css';
 import '../css/progress.css'
 import { ProgressBar } from 'react-bootstrap'
 
-export function ProgressCircular () {
-    const percentage = 90;
+export function ProgressCircular (props) {
+    const percentage = props.percent;
     return(
         <div className='progress-circular'>
         <h5>Overall Completion</h5>
@@ -17,8 +17,8 @@ export function ProgressCircular () {
     
 }
 
-export function ProgressLinear () {
-    const now = 10
+export function ProgressLinear (props) {
+    const now = props.percent;
     return (
         <div className='progress-linear'>
             <h5>Excavation</h5>
