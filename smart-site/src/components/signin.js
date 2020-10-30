@@ -47,23 +47,23 @@ export function SignIn () {
         <React.Fragment>
         <div className="signin">
 
-            <div id='signin-header'>Sign In</div>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formGroupEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" required onChange={e=>setEmail(e.target.value)} autofocus/>
-                </Form.Group>
-                <Form.Group controlId="formGroupPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" required onChange={e=>setPassword(e.target.value)}/>
-                </Form.Group>
-                <Button variant="custom" type="submit">
-                    Submit
-                </Button>
-            </Form>
-        </div>
-        </React.Fragment>
-    )}
+                <div id='signin-header'>Sign In</div>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group controlId="formGroupEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" required onChange={e=>setEmail(e.target.value)} autofocus/>
+                    </Form.Group>
+                    <Form.Group controlId="formGroupPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password" required onChange={e=>setPassword(e.target.value)}/>
+                    </Form.Group>
+                    <Button variant="custom" type="submit">
+                        Submit
+                    </Button>
+                </Form>
+            </div>
+            </React.Fragment>
+        )}
     else if(auth){
         return(
             <Route

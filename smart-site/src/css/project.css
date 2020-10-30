@@ -1,0 +1,12 @@
+.drawer{
+    background-color:rgb(231, 231, 231);
+    min-height:100vh;
+}
+
+.contents{
+    padding:2vh;
+}
+.expandopp{
+    transform:rotate(180deg);
+    transition: 0.2s ease-out;
+}

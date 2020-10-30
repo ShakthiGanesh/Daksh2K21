@@ -3,10 +3,8 @@ const Schema = mongoose.Schema;
 
 const projectModel = Schema({
     _id : Schema.Types.ObjectId,
-    name : {
-        type: String,
-        required: true
-    },
+    color:String,
+    flooring:String,    
     staffs : [{
         type : Schema.Types.ObjectId,
         ref : "User"
