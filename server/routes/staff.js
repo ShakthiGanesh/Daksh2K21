@@ -46,7 +46,7 @@ router.post('/changeStatus',(req,res)=>{
     });
 });
 
-router.post('/update',upload('update'),(req,res)=>{
+router.post('/update',upload.single('update'),(req,res)=>{
     const token = req.cookies.jwt;
     jwt.verify(token,process.env.SECRET_KEY || 'secret_key',(err,decoded)=>{
         User.findOne({_id:decoded.data.id})

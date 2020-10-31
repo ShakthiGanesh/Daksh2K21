@@ -212,6 +212,7 @@ class Project extends Component{
         }
         this.depSetter = this.depSetter.bind(this);
         this.drawerToggler = this.drawerToggler.bind(this);
+        this.dataFetcher = this.dataFetcher.bind(this);
     }
 
     drawerToggler(){
