@@ -10,6 +10,18 @@ import {AuthContext} from "../public/authContext";
 import Box from "@material-ui/core/Box";
 import Input from "@material-ui/core/Input";
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
+import {BaseURL} from "../public/baseURL";
+import Grid from "@material-ui/core/Grid";
+import withStyles from "@material-ui/core/styles/withStyles";
+
+const styles =  () => ({
+    appBar : {
+        position : 'relative'
+    },
+    title : {
+        flex : 1
+    }
+});
 
 class Message extends Component {
     constructor(props) {
@@ -29,7 +41,7 @@ class Message extends Component {
             method : 'GET'
         })
             .then ( response => {
-                if ( resopnse.ok )
+                if ( response.ok )
                     return response.json();
                 else throw new Error({ message : response.json().message });
             })
@@ -55,7 +67,7 @@ class Message extends Component {
     render() {
 
         const { isAuthenticated, user_id } = this.context;
-
+        const { classes } = this.props;
         return(
             <>
                 <Dialog
@@ -97,4 +109,4 @@ class Message extends Component {
     }
 }
 
-export default Message;
+export default withStyles(styles)(Message);

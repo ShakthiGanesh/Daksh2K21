@@ -3,6 +3,9 @@ import {BaseURL} from '../public/baseURL';
 import {Dialog, DialogActions, DialogContent, DialogTitle, Divider, MenuItem} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
+import Button from "@material-ui/core/Button";
 
 class UserForm extends Component{
 
@@ -74,7 +77,7 @@ class UserForm extends Component{
                     return response.json();
                 else throw new Error({message:response.json().message});
             })
-            .then ( data => this.setState( { departments : response } ) )
+            .then ( data => this.setState( { departments : data } ) )
             .catch( error => this.setState( { error : true, toastMessage : error.message } ) );
     }
 
