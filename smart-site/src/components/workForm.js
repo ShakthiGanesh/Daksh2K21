@@ -76,7 +76,7 @@ export default function CreateWork(props){
         <Snackbar
             anchorOrigin={{vertical:'top',horizontal:'center'}}
             autoHideDuration={10000}
-            open={error?true:false}
+            open={error}
             onClose={()=>setError(false)}
         >
             <Alert severity="warning">Error {error}</Alert>

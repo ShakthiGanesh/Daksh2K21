@@ -22,6 +22,6 @@ const userModel = new Schema({
 userModel.pre('save',async next=>{
     this.password = await bcrypt.hash(this.password,process.env.SALT || 'secret_key');
     next();
-})
+});
 
 module.exports = mongoose.model('User',userModel);
