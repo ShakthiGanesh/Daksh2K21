@@ -9,10 +9,12 @@ import { Footer } from './components/footer';
 import { Customer } from './components/customer';
 import { Plans } from './components/plans';
 import Contact from './components/contact';
+import AuthContextProvider from './public/authContext';
 
 function App() {
   return (
     <div className="App">
+      <AuthContextProvider>
       <Route path="/" exact>
         <Header />
         <Home />
@@ -36,7 +38,7 @@ function App() {
         <Contact />
         <Footer />
       </Route>
-      
+      </AuthContextProvider>
     </div>
   );
 }
