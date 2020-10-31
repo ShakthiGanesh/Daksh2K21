@@ -9,6 +9,9 @@
     height: 48vh;
 }
 
+.form-control {
+    border: 1px solid #d38450;
+}
 .btn-custom {
     background-color: var(--dark-brown-bg);
     color: white;
@@ -21,9 +24,9 @@
 }
 
 .signin div {
-    font-family: "Ink free";
-    color: #5C3114;
-    font-weight: 600;
+    font-family: "Candara";
+    color: rgba(0, 0, 0, 0.9);
+    font-weight: 500;
 }
 
 #signin-header {
