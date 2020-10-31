@@ -1,10 +1,12 @@
 import React,{Component,useState} from 'react';
 import {BaseURL} from '../public/baseURL';
 import {Link} from 'react-router-dom';
-import {Button,Hidden,Dialog,DialogTitle,DialogContent,DialogContentText,Grid,Container,TextField,IconButton,List,ListItem,CardActions,ListItemText,Box,CardContent,Card,CardHeader,Typography,Collapse} from '@material-ui/core';
+import {Button,Snackbar,Hidden,Dialog,DialogTitle,DialogContent,DialogContentText,Grid,Container,TextField,IconButton,List,ListItem,CardActions,ListItemText,Box,CardContent,Card,CardHeader,Typography,Collapse} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {Alert} from '@material-ui/lab';
+
 
 function AdminNav(props){
     return(
@@ -32,21 +34,25 @@ const Work = props=>{
     const [success,setSuccess] = useState(false);
     const [error,setError] = useState(false);
     const [stat,setStat] = useState(false);
+    const [image,setImage] = useState(null);
     function handleToggle(){
         setOpen(!open);
     }
     function uploadial(){
         setuplo(!uplo);
     }
-    function uploader(e){
+    function imager(e){
+        setImage(e.targe.files[0]);
+    }
+    function uploader(){
         let formData = new FormData();
-        formData.append("file",e.target.files[0]);
+        formData.append("file",image);
         fetch(BaseURL + '/admin/upload',{
             method:"POST",
             headers:{
                 'Content-Type':'application/json'
             },
-            body:{image:e.target.files[0],message:mes}
+            body:{image:image,message:mes}
         })
         .then(response=>{
             if(response.ok){
@@ -77,6 +83,10 @@ const Work = props=>{
     function handleStatusToggle(){
         setStat(!stat);
     }
+    function toastClose(){
+        setError(false);
+        setSuccess(false);
+    }
     return(
         <>   
             <Snackbar
@@ -85,7 +95,7 @@ const Work = props=>{
                 autoHideDuration={5000}
                 onClose={()=>toastClose}
                 >
-                    <Alert severity={error? "error" : "success"}>{error?`An error occured ${error}` || "Completed successfully"}</Alert>
+                    <Alert severity={error? "error" : "success"}>{error?`An error occured ${error}` : "Completed successfully"}</Alert>
             </Snackbar>
             <Dialog open={uplo} onClose={()=>uploadial}>
                 <DialogTitle>
@@ -93,8 +103,8 @@ const Work = props=>{
                 </DialogTitle>
                 <DialogContent>
                     <TextField fullwidth={true} label="Message" value={mes} onChange={e=>setMes(e.target.value)}/>
-                    <input type="file" onChange={e=>uploader(e)}/>
-                    <Button onClick={e=>uploader(e)}>Upload</Button>
+                    <input type="file" onChange={e=>imager(e)}/>
+                    <Button onClick={()=>uploader}>Upload</Button>
                 </DialogContent>
             </Dialog>
             <Dialog open={stat} onClose={()=>setStat(!stat)}>
