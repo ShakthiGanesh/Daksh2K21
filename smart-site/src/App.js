@@ -10,6 +10,7 @@ import { Customer } from './components/customer';
 import { Plans } from './components/plans';
 import Contact from './components/contact';
 import AuthContextProvider from './public/authContext';
+import UserForm from "./components/userForm";
 
 function App() {
   return (
@@ -38,6 +39,9 @@ function App() {
         <Contact />
         <Footer />
       </Route>
+          <Route path='/u' exact>
+              <UserForm open={true} onCloseHandler={()=>console.log("Closed")}/>
+          </Route>
       </AuthContextProvider>
     </div>
   );

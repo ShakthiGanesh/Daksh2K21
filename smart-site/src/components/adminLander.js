@@ -61,7 +61,7 @@ class AdminPage extends Component {
         })
         .then(projects => this.setState({projects:projects}))
         .catch(err=>this.setState({error:err}));
-        fetch(BaseURL + '/admin/departments',{method:'GET'})
+        fetch(BaseURL + '/admin/department',{method:'GET'})
         .then(response => {
             if(response.ok){
                 return response.json();

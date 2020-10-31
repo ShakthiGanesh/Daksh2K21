@@ -10,7 +10,7 @@ const router = Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded());
 
-router.route('/department')
+router.route(`/department`)
     .post((req, res) => {
             Department.findOne({ name: req.body.name }, (err, dept) => {
                 if (dept) {
@@ -26,10 +26,10 @@ router.route('/department')
         })
 
     .get((req,res)=>{
-        Department.find({})
-        .populate('works')
-        .then(departments=>res.status(200).json(departments))
-        .catch(err=>res.status(500).json({error:err.message}));
+        Department.find( {} )
+            .populate( `works managers` )
+            .then( departments => res.status(200).json(departments) )
+            .catch( err => res.status(500).json({error:err.message}) );
     })
     .put((req,res)=>{
         Department.update({_id:req.body._id},
@@ -45,29 +45,29 @@ router.route('/department')
         .catch(err=>res.status(500).json({error:err.message}));
     });
 
-router.route('/workTemplate')
-    .post((req,res)=>{
-        WorkTemplate.findOne({name:req.body.name})
-        .then(()=>res.status(400).json({error:"The work allready exists"}).end())
-        .catch(err=>console.log(err));
+router.route(`/workTemplate`)
+    .post((req,res) => {
+        WorkTemplate.findOne( { name : res.body.name } )
+            .then ( work => res.status(400).json({ message : "The work allready exists" } ) )
+            .catch ( error => console.log(error.message));
         WorkTemplate.create({
-            _id: mongoose.Types.ObjectId(),
-            name:req.body.name,
-            department : req.body.dept,
-            duration: req.body.duration,
-            cost:req.body.cost
+            _id : mongoose.Types.ObjectId(),
+            name : req.body.name,
+            department : req.body.department,
+            duration : Number(req.body.dump),
+            cost : Number(req.body.cost)
         })
-        .then((item)=>{
-            Department.update({_id:req.body.dept},
-                {
-                    $push:{
-                        works : item._id
-                    }
-                })
-                .then(()=>res.status(200).json({message:"Successfully added work" + item.name}))
-                .catch(err=>res.status(500).json(err));
-        })
-        .catch(err=>res.status(500).json(err));
+            .then ( work => {
+                Department.update( { _id : req.body.department },
+                    {
+                        $push:{
+                            works : work._id
+                        }
+                    })
+                    .then( () => res.status(200).json( { message : `Added work ${work.name}` } ) )
+                    .catch ( error => res.status(500).json( { message : error.message } ) );
+            } )
+            .catch ( error => res.status(500).json( { message : error.message } ) );
     })
     .get((req,res)=>{
         WorkTemplate.find({})
@@ -144,5 +144,45 @@ router.route('/plan')
         .then(()=>res.status(200).json({message:"Created plan"}))
         .catch(err=>res.status(500).json({error:err}));
     });
+
+router.get('/getDepartmentBasic',(req,res)=>{
+    Department.find({})
+        .select("_id name")
+        .then( departments => res.status(200).json(departments))
+        .catch( error => res.status(500).json({ message : error }));
+});
+
+router.post('/createUser', (req,res) => {
+    User.findOne( { email : req.body.email } )
+        .then ( user => res.status(400).json( { message : "A user with this email allready exists "}))
+        .catch ( error => console.log(error.message));
+
+    if ( req.body.group === "staff" ) {
+        User.findOne( { staff_id : req.body.staff_id } )
+            .then ( user => res.status(400).json( { message : `${user.name} is allready assigned with this staff id`}))
+            .catch ( error => console.log(error.message));
+    }
+
+    User.create( {
+        _id : mongoose.Types.ObjectId(),
+        name : req.body.name,
+        email : req.body.email,
+        password : req.body.password,
+        group : req.body.group,
+        staff_id : req.body.staff_id || null,
+        department : req.body.department || null,
+        mpbile : req.body.mobile || null
+    } )
+        .then ( user => {
+            if ( req.body.group === "staff" ) {
+                Department.update( { _id : req.body.department } , {
+                    $push : { managers : user._id }
+                })
+            }
+            res.status(200).json({message: `Addeded ${user.name}`});
+        } )
+        .catch ( error => res.status(500).json({message : error.message}));
+});
+
 
 module.exports = router;

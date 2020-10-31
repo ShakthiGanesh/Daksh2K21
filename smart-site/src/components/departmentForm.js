@@ -25,7 +25,7 @@ export default function CreateDepartment(props){
 
     const handleClose = ()=>setOpen(false);
     function handleSubmit(){
-        fetch(BaseURL+'/admin/postDept',{
+        fetch(BaseURL+'/admin/department',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'

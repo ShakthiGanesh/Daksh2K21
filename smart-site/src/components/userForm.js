@@ -74,7 +74,7 @@ class UserForm extends Component{
                     return response.json();
                 else throw new Error({message:response.json().message});
             })
-            .then ( data => this.setState( { departments : response.departments } ) )
+            .then ( data => this.setState( { departments : response } ) )
             .catch( error => this.setState( { error : true, toastMessage : error.message } ) );
     }
 
@@ -144,3 +144,5 @@ class UserForm extends Component{
         )
     }
 }
+
+export default UserForm;

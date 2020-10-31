@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const workTemplate = Schema({
     _id: Schema.Types.ObjectId,
-    name:String,
+    name:{
+        type : String,
+        unique : true
+    },
     department : {
         type:Schema.Types.ObjectId,
         ref:"Department"
@@ -25,16 +28,17 @@ const gallerySchema = Schema({
 
 const planSchema = Schema({
     _id: Schema.Types.ObjectId,
-    name : String,
-    image : String,
-    works:[{
-        type:Schema.Types.ObjectId,
-        ref:"WorkTemplate"
+    name: String,
+    images: [{
+        type: String
+    }],
+    works: [{
+        type: Schema.Types.ObjectId,
+        ref: "WorkTemplate"
     }]
-},{
-    collection:'plans'
+}, {
+    collection: 'plans'
 });
-
 module.exports = {
     WorkTemplate: mongoose.model('WorkTemplate',workTemplate),
     GalleryTemplate: mongoose.model("GalleryTemplate",gallerySchema),

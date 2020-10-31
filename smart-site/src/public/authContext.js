@@ -4,7 +4,8 @@ export const AuthContext = createContext();
 
 class AuthContextProvider extends Component {
     state = {
-        isAuthenticated:true
+        isAuthenticated:true,
+        user_id : ''
     }
     render(){
         return(

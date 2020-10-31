@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 const userModel = new Schema({
     _id : Schema.Types.ObjectId,
     name: String,
-    email : String,
+    email : {
+        type : String,
+        unique : true
+    },
     password : String,
     group: String,
     projects:[{
