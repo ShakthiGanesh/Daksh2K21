@@ -1,19 +1,5 @@
 import "../css/home.scss";
 import React from 'react';
-import $ from 'jquery'
-
-$(function() {
-    $('.intro').addClass('go');
-  
-    $('.reload').click(function() {
-      $('.intro').removeClass('go').delay(200).queue(function(next) {
-        $('.intro').addClass('go');
-        next();
-      });
-  
-    });
-  })
-
 
 
 export default function Home() {
@@ -22,7 +8,21 @@ export default function Home() {
         <React.Fragment>
         <div class="home">
             <img alt="Home Display " src="../images/smartsite-dp.jpg"></img>
+            <svg viewBox="0 0 960 300">
+              <symbol id="s-text">
+                <text text-anchor="middle" x="50%" y="80%">WE BUILD!</text>
+              </symbol>
+
+              <g class = "g-ants">
+                <use xlinkHref="#s-text" class="text-copy"></use>
+                <use xlinkHref="#s-text" class="text-copy"></use>
+                <use xlinkHref="#s-text" class="text-copy"></use>
+                <use xlinkHref="#s-text" class="text-copy"></use>
+                <use xlinkHref="#s-text" class="text-copy"></use>
+              </g>
+            </svg>
         </div>
+        
         </React.Fragment>
     )
 }
