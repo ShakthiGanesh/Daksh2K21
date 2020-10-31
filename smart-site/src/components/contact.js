@@ -5,6 +5,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import MailIcon from '@material-ui/icons/Mail';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import CallIcon from '@material-ui/icons/Call';
 
 export default function Contact() {
    
@@ -17,6 +18,11 @@ export default function Contact() {
             </div>
             <div className='contact-form'>
                 <h3>CONTACT US</h3>
+                <div className='contact-direct'>
+                    <p><MailIcon /> www.psconstructions@gmail.com</p>
+                    <p><CallIcon /> +91-9876543210</p>
+                </div>
+                
                 <Form>
                     <Form.Group controlId="contact.name">
                         <Form.Control type="text" placeholder="Name" />
@@ -35,10 +41,9 @@ export default function Contact() {
                 <h4>CONNECT WITH US!</h4>
                 </div>  
                 <div className='socialmedia'>
-                    <p><FacebookIcon /></p>
-                    <p><InstagramIcon /></p>
-                    <p><TwitterIcon /></p>
-                    <p><MailIcon /></p>
+                    <a href='https://www.facebook.com' target='blank'><FacebookIcon /></a>
+                    <a href='https://www.instagram.com' target='blank'><InstagramIcon /></a>
+                    <a href='https://www.twitter.com' target='blank'><TwitterIcon /></a>
                     
                     
                 </div>
