@@ -17,7 +17,6 @@ function Header () {
                 <Nav.Link href="/" id={path==="/"?"nav-Link":null}>Home</Nav.Link>
                 <Nav.Link href="/plans" id={path==="/plans"?"nav-Link":null}>Our Plans</Nav.Link>
                 <Nav.Link href="/contactus" id={path==="/contactus"?"nav-Link":null}>Contact Us</Nav.Link>
-                <Nav.Link href="/about" id={path==="/about"?"nav-Link":null}>About</Nav.Link>
                 <Nav.Link href='/signin' id={path==="/signin"?"nav-Link":null}><AccountCircleIcon />Sign In</Nav.Link>
             </Nav>
             
