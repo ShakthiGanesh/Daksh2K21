@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,500;0,800;1,300&display=swap');
+
+AdminPage{
+    font-family:'Poppins',sans-serif;
+    background-color:#f3f3f3;
+}
+.admin-nav{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    height: 50px;
+    background-color:#ffffff;
+    color:#363636;
+}
+.signout{
+    display:flex;
+    direction:column;
+    justify-content: center;
+    align-items: center;
+}
+.header{
+    min-height: 40vh;
+    width:100vw;
+}
