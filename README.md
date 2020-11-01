@@ -6,7 +6,7 @@
    * There are tabs for Contact, Plans offered and Sign-in page for already committed customers and admin.
    * In plans, you can check all the plans offered by our company.
    * You can use chatbot to to get our service.
-   * In Chatbot, your detail will be collected and our team contact personally through.
+   * In Chatbot, your detail will be collected and our team contact personally through call.
    * Once, you confirm our service, your login credentials will be given to you.(In admin page, customer accounts will be added, once you confirm our service)
-   * You can use the log-in credntials to log-in as the acommitted customer.
-   * In your page, you can see all details of your project.
+   * You can use the log-in credntials to log-in as the committed customer.
+   * After logging in,in your page, you can see all details of your project.
