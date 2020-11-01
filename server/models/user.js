@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 const userModel = new Schema({
     _id : Schema.Types.ObjectId,
     name: String,
-    email : String,
+    email : {
+        type : String,
+        unique : true
+    },
     password : String,
     group: String,
     projects:[{
@@ -22,6 +25,6 @@ const userModel = new Schema({
 userModel.pre('save',async next=>{
     this.password = await bcrypt.hash(this.password,process.env.SALT || 'secret_key');
     next();
-})
+});
 
 module.exports = mongoose.model('User',userModel);

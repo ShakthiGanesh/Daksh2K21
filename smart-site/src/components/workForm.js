@@ -25,31 +25,31 @@ export default function CreateWork(props){
     const [expense, setExpense] = useState('');
     const [open, setOpen] = useState(props.open);
     const [error,setError] = useState(false);
-    const depts = useRef([{_id:1,name:'one'},{_id:2,name:'two'},{_id:3,name:'tre'}]);
+    const depts = useRef([]);
 
     useEffect(()=>{
-        fetch(BaseURL + 'admin/getDept',{
+        fetch(BaseURL + 'admin/getDepartmantBasic',{
             method:'GET',
             credentials : 'same-origin'
         })
         .then(res=>{
             if(res.ok)
                 return res.json();
-            else throw new Error({message:res.error});
+            else throw new Error({message:res.message});
         })
-        .then(data=>depts.current = data.depts)
+        .then(data=>depts.current = data)
         .catch(err=>console.log(err.message));
     },[name,dept,duration,expense,open])
 
     const handleSubmit = ()=>{
-        fetch(BaseURL + '/admin/postWork',{
+        fetch(BaseURL + '/admin/workTemplate',{
             method:"POST",
             headers:{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
                 name : name,
-                dept : dept,
+                department : dept,
                 duration : duration,
                 cost : expense
             }),
@@ -61,7 +61,7 @@ export default function CreateWork(props){
                 setOpen(true);
             }
             else{
-                throw new Error(res.json().then(data=>data.error));
+                throw new Error(res.json().then(data=>data.message));
             }
         })
         .catch(err=>setError("Cannot connect to server"));
@@ -76,7 +76,7 @@ export default function CreateWork(props){
         <Snackbar
             anchorOrigin={{vertical:'top',horizontal:'center'}}
             autoHideDuration={10000}
-            open={error?true:false}
+            open={error}
             onClose={()=>setError(false)}
         >
             <Alert severity="warning">Error {error}</Alert>

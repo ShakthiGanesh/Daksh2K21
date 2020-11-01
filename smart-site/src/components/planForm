@@ -1,0 +1,151 @@
+import React, {Component} from "react";
+import {BaseURL} from "../public/baseURL";
+import Dialog from "@material-ui/core/Dialog";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+import {Button, IconButton} from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
+import withStyles from "@material-ui/core/styles/withStyles";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Paper from "@material-ui/core/Paper";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Checkbox from '@material-ui/core/Checkbox';
+import ListItemText from "@material-ui/core/ListItemText";
+
+const styles =  () => ({
+    appBar : {
+        position : 'relative'
+    },
+    title : {
+        flex : 1
+    },
+    paper : {
+        width : "100%",
+        height : "50vh",
+        overflow : "auto"
+    }
+});
+
+class PlanForm extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+
+            // Fetched data
+            availableWorks : [],
+
+            // Data to post
+            selectedWorks : new Set(),
+            images : [],
+            name : '',
+
+            // Form control
+            checkedLeft : [],
+            checkedRight : [],
+
+            // Connection control
+            error : false,
+            success : false,
+            toastMessage : null
+
+        }
+
+        this.dataFetcher = this.dataFetcher.bind(this);
+
+    }
+
+    dataFetcher() {
+        fetch(BaseURL + '/admin/workBasic')
+            .then ( response => {
+                if ( response.ok )
+                    return response.json();
+                else throw new Error( { message : response.json().message } )
+            })
+            .then ( data => this.setState( { availableWorks : data } ))
+            .catch ( error => {
+                this.setState( { error : true, toastMessage : error.message } )
+            })
+    }
+
+    render() {
+
+        const { classes } = this.props;
+
+        return(
+            <>
+               <Dialog fullScreen open={ this.props.open } onClose={ this.props.onCloseHandler }>
+                   <AppBar className={ classes.appBar }>
+                       <IconButton edge={"start"} onClick={ this.props.onCloseHandler }>
+                           <CloseIcon />
+                       </IconButton>
+                       <Typography component={"h6"} classNames={ classes.title }>Create a new plan</Typography>
+                   </AppBar>
+                   <Grid container m={3} justify={"flex-start"} alignItems={"center"} direction={"row"} spacing={4}>
+                       <Grid item xs={12} md={6}>
+                           <TextField label = "Name" value={ this.state.name } onChange={ e => this.setState( { name : e.target.name } ) } fullWidth={true}/>
+                       </Grid>
+                       <Grid item xs={12} md={6}>
+                           <TextField label={"Images"} value={ this.state.images } type = "file" onChange={ e => this.setState( {images : e.target.files } ) }/>
+                       </Grid>
+                       <Grid item container spacing={2} xs={12}>
+                            <Grid item xs={4}>
+                                <Paper className={classes.paper}>
+                                    <List component={"div"} role={"list"}>
+                                        { this.state.availableWorks.map( work => {
+                                            <ListItem key={work._id} button role={"listitem"} onClick={ this.handleSelect(work._id) }>
+                                                <ListItemIcon>
+                                                    <Checkbox
+                                                        checked={this.state.checkedLeft.indexOf(work._id) !== -1}
+                                                        tabIndex={-1}
+                                                        disableRipple
+                                                        />
+                                                </ListItemIcon>
+                                                <ListItemText primary={work.name}/>
+                                            </ListItem>
+                                        })}
+                                    </List>
+                                </Paper>
+                            </Grid>
+                           <Grid item>
+                               <Grid container direction={"column"} spacing={2} alignItems={"center"}>
+                                   <Button
+                                       variant={"outlined"}
+                                       onClick={handleAdd}
+                                       >&gt;</Button>
+                                   <Button
+                                       variant={"outlined"}
+                                       onClick={handleRemove}
+                                       >&lt;</Button>
+                               </Grid>
+                           </Grid>
+                           <Grid item xs={4}>
+                               <Paper className={classes.paper}>
+                                   <List component={"div"} role={"list"}>
+                                       { this.state.selectedWorks.map( work => {
+                                           <ListItem key={work._id} button role={"listitem"} onClick={ this.handleSelect(work._id) }>
+                                               <ListItemIcon>
+                                                   <Checkbox
+                                                       checked={this.state.checkedRight.indexOf(work._id) !== -1}
+                                                       tabIndex={-1}
+                                                       disableRipple
+                                                   />
+                                               </ListItemIcon>
+                                               <ListItemText primary={work.name}/>
+                                           </ListItem>
+                                       })}
+                                   </List>
+                               </Paper>
+                           </Grid>
+                       </Grid>
+                   </Grid>
+               </Dialog>
+            </>
+        )
+    }
+}
+
+export default withStyles(styles)(PlanForm);
