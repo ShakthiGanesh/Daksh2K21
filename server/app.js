@@ -21,7 +21,10 @@ mongoose.connect('mongodb+srv://analytics:analytics-password@cluster0.ix2gk.mong
     useUnifiedTopology:true
 });
 
-app.use(cors());
+app.use(cors({
+    origin:'http://localhost:3001',
+    credentials:true
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());

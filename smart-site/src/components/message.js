@@ -37,7 +37,7 @@ class Message extends Component {
     }
 
     dataFetch() {
-        fetch( BaseURL + 'common/message',{
+        fetch( BaseURL + '/common/message',{
             method : 'GET'
         })
             .then ( response => {
