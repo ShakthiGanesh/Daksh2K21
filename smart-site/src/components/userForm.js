@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
 
 class UserForm extends Component{
 
@@ -95,49 +96,51 @@ class UserForm extends Component{
                     <DialogTitle> Create a new staff or user</DialogTitle>
                     <Divider/>
                     <DialogContent>
-                        <Grid container alignItems="center" justify="center" spacing={2}>
-                            <Grid item xs={12}>
-                                <TextField fullWidth label="Name" value={this.state.name} onChange={e => this.setState({ name : e.target.value })}/>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField fullWidth label="Email" type="email" value={ this.state.email } onChange={ e => this.setState({ email : e.target.value })} />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField fullWidth label="Password" type="password" value={ this.state.password } onChange={ e => this.setState({ password : e.target.value })} />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField select fullWidth label="Group" value={ this.state.group } onChange={ e => this.setState({ group : e.target.value })}>
-                                    <MenuItem value={"staff"}>
-                                        Staff
-                                    </MenuItem>
-                                    <MenuItem value={"Customer"}>
-                                        Customer
-                                    </MenuItem>
-                                </TextField>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField disabled={this.state.group !== "staff"} value={ this.state.staff_id } onChange={e => this.setState({ staff_id : e.target.value })} />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField select disabled={this.state.group !== "staff"} value = { this.state.department } onChange={e => this.setState({ department : e.target.value })}>
-                                    {this.state.departments.map( department => {
-                                        <MenuItem value={ department._id }>
-                                            {department.name}
+                        <Container>
+                            <Grid container alignItems="center" justify="center" spacing={4}>
+                                <Grid item xs={12}>
+                                    <TextField variant={"outlined"} fullWidth label="Name" value={this.state.name} onChange={e => this.setState({ name : e.target.value })}/>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField variant={"outlined"} fullWidth label="Email" type="email" value={ this.state.email } onChange={ e => this.setState({ email : e.target.value })} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField variant={"outlined"} fullWidth label="Password" type="password" value={ this.state.password } onChange={ e => this.setState({ password : e.target.value })} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField variant={"outlined"} select fullWidth label="Group" value={ this.state.group } onChange={ e => this.setState({ group : e.target.value })}>
+                                        <MenuItem value={"staff"}>
+                                            Staff
                                         </MenuItem>
-                                    })}
-                                </TextField>
+                                        <MenuItem value={"Customer"}>
+                                            Customer
+                                        </MenuItem>
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField variant={"outlined"} fullWidth label={"Staff id"} disabled={this.state.group !== "staff"} value={ this.state.staff_id } onChange={e => this.setState({ staff_id : e.target.value })} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField variant={"outlined"} fullWidth label={"Department"} select disabled={this.state.group !== "staff"} value = { this.state.department } onChange={e => this.setState({ department : e.target.value })}>
+                                        {this.state.departments.map( department => (
+                                            <MenuItem value={ department._id }>
+                                                {department.name}
+                                            </MenuItem>
+                                        ))}
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField variant={"outlined"} label={"Mobile"} type="tel" value={ this.state.mobile } onChange={ e=> this.setState({ mobile : e.target.value})}/>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField type="tel" value={ this.state.mobile } onChange={ e=> this.setState({ mobile : e.target.value})}/>
-                            </Grid>
-                        </Grid>
+                        </Container>
                     </DialogContent>
                     <Divider/>
                     <DialogActions>
                         <Button color="primary" onClick={ () => this.postContent() }>
                             Create
                         </Button>
-                        <Button onClick={ () => this.props.onCloseHandler }>
+                        <Button onClick={this.props.onCloseHandler }>
                             Cancel
                         </Button>
                     </DialogActions>

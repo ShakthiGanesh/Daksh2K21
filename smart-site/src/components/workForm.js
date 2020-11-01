@@ -82,20 +82,22 @@ export default function CreateWork(props){
             <Alert severity="warning">Error {error}</Alert>
         </Snackbar>
         <Dialog 
-            onClose={()=>setOpen(false)}
-            open={open}
+            onClose={props.onCloseHandler}
+            open={props.open}
             fullWidth={true}
             maxWidth="xs"
             >
-            <IconButton
-                aria-label="close"
-                onClick={()=>setOpen(false)}
-            >
-            <CloseIcon />
-            </IconButton>
+
             <DialogContent>
+                <IconButton
+                    aria-label="close"
+                    onClick={props.onCloseHandler}
+                >
+                    <CloseIcon />
+                </IconButton>
                 Create a new Work
             </DialogContent>
+
             <DialogContent
                 fullWidth={true}
                 maxWidth='xl'

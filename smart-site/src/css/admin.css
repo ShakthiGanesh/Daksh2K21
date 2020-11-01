@@ -18,7 +18,7 @@ body{
     padding:20px;
 }
 .admin-nav a{
-    color : lightgrey!important;
+    color : #d3d3d3 !important;
 }
 .signout{
     display:flex;

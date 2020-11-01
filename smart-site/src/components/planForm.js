@@ -17,6 +17,7 @@ import {CheckBox} from "@material-ui/icons";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
 import Input from "@material-ui/core/Input";
+import Container from "@material-ui/core/Container";
 
 const styles =  () => ({
     appBar : {
@@ -29,6 +30,9 @@ const styles =  () => ({
         width : "100%",
         height : "50vh",
         overflow : "auto"
+    },
+    white : {
+        color : '#ffffff'
     }
 });
 
@@ -98,7 +102,12 @@ class PlanForm extends Component {
             },
             body : formData
         })
-            .then( response => response.ok ? response.json() : throw new Error( { message : response.json }))
+            .then( response => {
+                if(response.ok)
+                    response.json();
+                else
+                    throw new Error({message: response.json().message});
+            })
             .then( response => this.setState( { success : true, toastMessage : response.message }))
             .catch( error => this.setState( { error : true, toastMessage : error.message } ) )
     }
@@ -111,46 +120,54 @@ class PlanForm extends Component {
             <>
                <Dialog fullScreen open={ this.props.open } onClose={ this.props.onCloseHandler }>
                    <AppBar className={ classes.appBar }>
-                       <IconButton edge={"start"} onClick={ this.props.onCloseHandler }>
-                           <CloseIcon />
-                       </IconButton>
-                       <Typography component={"h6"} classNames={ classes.title }>Create a new plan</Typography>
+                        <Box display={"flex"}
+                             justifyContent={"space-between"}
+                             flexDirection={"row"}
+                             alignItems={"center"}
+                             pl={4} pr={4}
+                             >
+                           <Typography component={"h6"} classNames={ classes.title }>Create a new plan</Typography>
+                           <IconButton className={classes.white} edge={"start"} onClick={ this.props.onCloseHandler }>
+                               <CloseIcon />
+                           </IconButton>
+                        </Box>
                    </AppBar>
-                   <Grid container m={3} justify={"flex-start"} alignItems={"center"} direction={"row"} spacing={4}>
-                       <Grid item xs={12} md={6}>
-                           <TextField label = "Name" value={ this.state.name } onChange={ e => this.setState( { name : e.target.name } ) } fullWidth={true}/>
-                       </Grid>
-                       <Grid item xs={12} md={6}>
-                           <Input label={"Images"} value={ this.state.images } type = "file" onChange={ e => this.setState( {images : e.target.files } ) }/>
-                       </Grid>
-                       <Grid item container spacing={4} xs={12}>
-                            <Grid item xs={4}>
-                                <Paper className={classes.paper}>
-                                    <List component={"div"} role={"list"}>
-                                        { this.state.availableWorks.map ( work => (
-                                            <ListItem key={work._id} button onClick={ this.handleSelect(work._id) }>
-                                                <ListItemIcon>
-                                                    <CheckBox
-                                                        checked={ this.state.selectedWorks.has( work._id ) }
-                                                        tabIndex={-1}
-                                                        />
-                                                </ListItemIcon>
-                                                <ListItemText primary={ work.name }/>
-                                            </ListItem>
-                                        ))}
-                                   </List>
-                               </Paper>
+                   <Box width={"100%"} height={100}></Box>
+                   <Container>
+                       <Grid container m={3} justify={"flex-start"} alignItems={"center"} direction={"row"} spacing={4}>
+                           <Grid item xs={12} md={6}>
+                               <TextField variant={"outlined"} label = "Name" value={ this.state.name } onChange={ e => this.setState( { name : e.target.name } ) } fullWidth={true}/>
                            </Grid>
-                       </Grid>
-                       <Divider/>
-                       <Grid item >
-                           <Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"}>
-                               <Button onClick={ this.handleSubmit } color={"primary"} variant={"filled"}>
+                           <Grid item xs={12} md={6}>
+                               <Input variant={"outlined"} label={"Images"} value={ this.state.images } type = "file" onChange={ e => this.setState( {images : e.target.files } ) }/>
+                           </Grid>
+                           <Grid item container spacing={4} xs={12}>
+                                <Grid item xs={4}>
+                                    <Container>
+                                        <List component={"div"} role={"list"}>
+                                            { this.state.availableWorks.map ( work => (
+                                                <ListItem key={work._id} button onClick={ this.handleSelect(work._id) }>
+                                                    <ListItemIcon>
+                                                        <CheckBox
+                                                            checked={ this.state.selectedWorks.has( work._id ) }
+                                                            tabIndex={-1}
+                                                            />
+                                                    </ListItemIcon>
+                                                    <ListItemText primary={ work.name }/>
+                                                </ListItem>
+                                            ))}
+                                       </List>
+                                    </Container>
+                               </Grid>
+                           </Grid>
+                           <Divider/>
+                           <Grid item >
+                               <Button variant={"contained"} onClick={ this.handleSubmit } color={"primary"}>
                                    Submit
                                </Button>
-                           </Box>
+                           </Grid>
                        </Grid>
-                   </Grid>
+                   </Container>
                </Dialog>
             </>
         )
