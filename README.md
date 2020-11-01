@@ -2,7 +2,7 @@
    This is the repository created for Daksh2K21 Web Dev Competition. The contributors are Shakthi Ganesh R and Piravin.K.C.M
    
    Work flow:
-   * By visiting this site you'll wnd in home page.
+   * By visiting this site you'll land in our home page.
    * There are tabs for Contact, Plans offered and Sign-in page for already committed customers and admin.
    * In plans, you can check all the plans offered by our company.
    * You can use chatbot to to get our service.
