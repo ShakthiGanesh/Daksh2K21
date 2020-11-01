@@ -2,10 +2,11 @@ import React, { Component} from 'react';
 import {AuthContext} from '../public/authContext';
 import {Hidden,Grid,Container,Card,CardContent,Typography,CardActions} from '@material-ui/core';
 import {BaseURL} from '../public/baseURL';
-
+import '../css/admin.css'
 import {Link} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import {ProgressCircular} from './progres';
+import {ProgressCircular} from './progress';
+import Paper from "@material-ui/core/Paper";
 
 function AdminNav(props){
     return(
@@ -18,7 +19,7 @@ function AdminNav(props){
 
 function ProjectCard(props){
     return(
-        <Card variant="outlined">
+        <Paper variant="outlined">
             <Link to={`/admin/project/${props.project._id}`}>
                 <Grid container spacing={4}>
                     <Grid item xs={4}>
@@ -37,7 +38,7 @@ function ProjectCard(props){
                     </Grid>
                 </Grid>
             </Link>
-        </Card>
+        </Paper>
     )
 }
 
@@ -76,9 +77,14 @@ class AdminPage extends Component {
     }
     render(){
         function progCalc(){
-            let stats = this.projects.map(project=>project.status);
-            let total = stats.reduce((prev,curr)=>prev+curr);
-            return total/stats.length;
+            try{
+                let stats = this.projects.map(project => project.status);
+                let total = stats.reduce((prev, curr) => prev + curr);
+                return total / stats.length;
+            }
+            catch{
+                console.log("Error");
+            }
         }
         var progres = progCalc();
         return(
@@ -94,9 +100,11 @@ class AdminPage extends Component {
                         </Grid>
                         <Grid item xs={12} md={7}>
                             <Container p={4}>
-                                {this.projects.map(project=>{
+                                {
+                                    this.state.projects.map(project=>(
                                     <ProjectCard project={project}/>
-                                })}
+                                ))
+                                }
                             </Container>
                         </Grid>
                     </Grid>

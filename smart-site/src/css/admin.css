@@ -4,17 +4,25 @@ AdminPage{
     font-family:'Poppins',sans-serif;
     background-color:#f3f3f3;
 }
+body{
+    background-color: #efefef;
+}
 .admin-nav{
     display:flex;
     flex-direction:row;
-    justify-content:flex-end;
+    justify-content:space-between;
+    align-items: center;
     height: 50px;
-    background-color:#ffffff;
-    color:#363636;
+    background-color: #393939;
+    color: #9d9d9d;
+    padding:20px;
+}
+.admin-nav a{
+    color : lightgrey!important;
 }
 .signout{
     display:flex;
-    direction:column;
+    flex-direction:column;
     justify-content: center;
     align-items: center;
 }
