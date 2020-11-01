@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const Work = require('../models/work');
 const Project = require('../models/project');
+const Message = require('../models/message');
 
 const router = Router();
 router.use(bodyParser.json());
@@ -15,7 +16,7 @@ router.get('/unauth',(req,res)=>{
     Project.findOne({_id:req.params.projectid})
                 .populate(['customer',{path:'works',populate:[{path:'user'},{path:'updates'},{path:'work',populate:{path:'department'}}]}])
                 .then(project=>{
-                    if(user._id==project.user._id){
+                    if(user._id===project.user._id){
                         res.status(200).json(project);
                     }
                     else
@@ -30,13 +31,13 @@ router.get('/unauth',(req,res)=>{
 router.get('/works/:projectid',(req,res)=>{
     const token = req.cookies.jwt;
     if(token){
-        jwt.verify(token,process.env.SECRET_KEY || 'secret_key',(err,decoded)=>{
+        jwt.verify(token,'secret_key',(err,decoded)=>{
             User.findOne({_id:decoded.data.id})
             .then(user=>{
                 Project.findOne({_id:req.params.projectid})
                 .populate(['customer',{path:'works',populate:[{path:'user'},{path:'updates'},{path:'work',populate:{path:'department'}}]}])
                 .then(project=>{
-                    if(user._id==project.user._id){
+                    if(user._id===project.user._id){
                         res.status(200).json(project);
                     }
                     else
@@ -56,7 +57,31 @@ router.get('/works/:projectid',(req,res)=>{
         }); }
 });
 
-router.get('/projects',)
+router.get('/message',(req,res)=>{
+    const token = req.cookies.jwt;
+    if(token){
+        jwt.verify(token,'secret_key',(err,decoded)=>{
+            User.findOne({_id:decoded.data.id})
+                .then(user=>{
+                    let data = {};
+                    Message.find({ to : { $in : user.projects } })
+                        .then( messages => {
+                            data.messages = messages;
+                        })
+                        .catch(err=>{
+                            console.log(err);
+                            res.status(500);
+                        });
+                    data.projects = user.projects;
+                    res.status(200).send(data);
+                })
+                .catch(err=>{
+                    console.log(err);
+                    res.status(500);
+                });
+
+        }); }
+})
 
 module.exports = router;
 
