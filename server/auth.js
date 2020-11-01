@@ -45,8 +45,7 @@ module.exports.loginVerification = async (req,res,next)=>{
             const token = await tokenizer({id:user._id,group:user.group});
             if(user.password === hashed){
                 res.cookie('jwt', token, {
-                    httpOnly:false,
-                    expires: new Date(Date.now())
+                    httpOnly:true
                 } );
                 next();
             }
