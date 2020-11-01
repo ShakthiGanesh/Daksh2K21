@@ -32,9 +32,9 @@ router.get('/works/:projectid',(req,res)=>{
     const token = req.cookies.jwt;
     if(token){
         jwt.verify(token,'secret_key',(err,decoded)=>{
-            User.findOne({_id:decoded.data.id})
-            .then(user=>{
-                Project.findOne({_id:req.params.projectid})
+            User.findOne({ _id : decoded.data.id })
+            .then(user => {
+                Project.findOne({ _id : req.params.projectid })
                 .populate(['customer',{path:'works',populate:[{path:'user'},{path:'updates'},{path:'work',populate:{path:'department'}}]}])
                 .then(project=>{
                     if(user._id===project.user._id){

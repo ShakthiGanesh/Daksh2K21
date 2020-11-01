@@ -39,7 +39,7 @@ export default function CreateDepartment(props){
             if(res.ok){
                 setSuccess(true);
                 setToast(`Created new department ${name}`);
-                setOpen(false);
+                props.onCloseHandler();
             }
             else throw new Error({message:res.json().error});
         })
@@ -64,8 +64,8 @@ export default function CreateDepartment(props){
                     <Alert severity={error? "error" : "success"}>{toast}</Alert>
             </Snackbar>
             <Dialog
-                onClose={handleClose}
-                open={open}
+                onClose={props.onCloseHandler}
+                open={props.open}
                 fullWidth={true}
                 maxWidth="xs"
                 >
@@ -82,7 +82,7 @@ export default function CreateDepartment(props){
                             </Typography>                            
                         </Grid>
                         <Grid item>
-                            <Button onClick={handleClose}>
+                            <Button onClick={props.onCloseHandler}>
                                 <CloseIcon/>
                             </Button>
                         </Grid>

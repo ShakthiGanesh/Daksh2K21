@@ -12,6 +12,7 @@ import Contact from './components/contact';
 import AuthContextProvider from './public/authContext';
 import UserForm from "./components/userForm";
 import CustomerDashboard from "./components/customerDashboard";
+import AdminPage from "./components/adminLander";
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
                 </Route>
                 <Route path="/dashboard" exact>
                     <CustomerDashboard/>
+                </Route>
+                <Route path="/admin" exact>
+                    <AdminPage/>
                 </Route>
             </Switch>
         </BrowserRouter>
