@@ -63,23 +63,12 @@ io.on('connect',socket=>{
             jwt.verify(token,'secret_key',(err,decoded)=>{
                 User.findOne({_id:decoded.data.id})
                     .then(user=>{
-                        if(user.group===req.body.group) {
-                            User.findOne({_id : req.user_id})
-                                .then(user=>{
-                                    user.projects.map(project=>{
-                                        socket.join(project._id);
-                                        io.to(project._id).emit('New User',{username:user.name});
-                                    });
-                                })
-                                .catch(error=>console.log(error));
-                        }
-                        else
-                            socket.disconnect();
+                        user.projects.map(project=>{
+                            socket.join(project._id);
+                            io.to(project._id).emit('New User',{username:user.name});
+                        });
                     })
-                    .catch(err=>{
-                        console.log(err);
-                        res.status(500);
-                    });
+                    .catch(error=>console.log(error));
             });
         }
         else{
@@ -94,28 +83,17 @@ io.on('connect',socket=>{
             jwt.verify(token,'secret_key',(err,decoded)=>{
                 User.findOne({_id:decoded.data.id})
                     .then(user=>{
-                        if(user.group===req.body.group) {
-                            User.findOne({_id : req.user_id})
-                                .then(user=>{
-                                    io.to(req.project_id).emit('message',{username:user.name,message:req.message});
-                                    Message.create({
-                                        _id:mongoose.Types.ObjectId(),
-                                        from : user._id,
-                                        to : req.project_id,
-                                        message : req.message
-                                    })
-                                        .then(()=>console.log("Saved message"))
-                                        .catch(error=>console.log(error));
-                                })
-                                .catch(error=>console.log(error));
-                        }
-                        else
-                            socket.disconnect();
+                        io.to(req.project_id).emit('message',{username:user.name,message:req.message});
+                        Message.create({
+                            _id:mongoose.Types.ObjectId(),
+                            from : user._id,
+                            to : req.project_id,
+                            message : req.message
+                        })
+                            .then(()=>console.log("Saved message"))
+                            .catch(error=>console.log(error));
                     })
-                    .catch(err=>{
-                        console.log(err);
-                        res.status(500);
-                    });
+                    .catch(error=>console.log(error));
             });
         }
         else{
