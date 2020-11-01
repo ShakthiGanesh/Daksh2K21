@@ -18,8 +18,10 @@ module.exports.authChecker = (req,res,next)=>{
         jwt.verify(token,'secret_key',(err,decoded)=>{
             User.findOne({_id:decoded.data.id})
             .then(user=>{
-                if(user.group===req.body.group)
+                if(user.group===req.body.group) {
+                    res.locals.user_id = user._id;
                     next();
+                }
                 else
                     res.status(401).json({error:"unauthenticated"});
             })

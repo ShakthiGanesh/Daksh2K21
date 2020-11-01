@@ -15,6 +15,8 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const User = require('./models/user');
+const bcrypt = require('bcryptjs');
+var cookie = require("cookie");
 
 mongoose.connect('mongodb+srv://analytics:analytics-password@cluster0.ix2gk.mongodb.net/node?retryWrites=true&w=majority',{
     useNewUrlParser:true,
@@ -53,29 +55,75 @@ app.use('/common',commonRoute);
 io.on('connect',socket=>{
     console.log("New ws connection" + socket.id);
     socket.on('setRoom',req=>{
-        User.findOne({_id : req.user_id})
-        .then(user=>{
-            user.projects.map(project=>{
-                socket.join(project._id);
-                io.to(project._id).emit('New User',{username:user.name});
+        const cookieee = socket.handshake.headers.cookie;
+        const parsed = cookie.parse(cookieee);
+        const token = parsed.jwt;
+
+        if(token){
+            jwt.verify(token,'secret_key',(err,decoded)=>{
+                User.findOne({_id:decoded.data.id})
+                    .then(user=>{
+                        if(user.group===req.body.group) {
+                            User.findOne({_id : req.user_id})
+                                .then(user=>{
+                                    user.projects.map(project=>{
+                                        socket.join(project._id);
+                                        io.to(project._id).emit('New User',{username:user.name});
+                                    });
+                                })
+                                .catch(error=>console.log(error));
+                        }
+                        else
+                            socket.disconnect();
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                        res.status(500);
+                    });
             });
-        })
-        .catch(error=>console.log(error));
+        }
+        else{
+            socket.disconnect();
+        }
     });
     socket.on('message',req=>{
-        User.findOne({_id : req.user_id})
-        .then(user=>{
-            io.to(req.project_id).emit('message',{username:user.name,message:req.message});
-            Message.create({
-                _id:mongoose.Types.ObjectId(),
-                from : user._id,
-                to : req.project_id,
-                message : req.message
-            })
-            .then(()=>console.log("Saved message"))
-            .catch(error=>console.log(error));
-        })
-        .catch(error=>console.log(error));
+        const cookieee = socket.handshake.headers.cookie;
+        const parsed = cookie.parse(cookieee);
+        const token = parsed.jwt;
+        if(token){
+            jwt.verify(token,'secret_key',(err,decoded)=>{
+                User.findOne({_id:decoded.data.id})
+                    .then(user=>{
+                        if(user.group===req.body.group) {
+                            User.findOne({_id : req.user_id})
+                                .then(user=>{
+                                    io.to(req.project_id).emit('message',{username:user.name,message:req.message});
+                                    Message.create({
+                                        _id:mongoose.Types.ObjectId(),
+                                        from : user._id,
+                                        to : req.project_id,
+                                        message : req.message
+                                    })
+                                        .then(()=>console.log("Saved message"))
+                                        .catch(error=>console.log(error));
+                                })
+                                .catch(error=>console.log(error));
+                        }
+                        else
+                            socket.disconnect();
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                        res.status(500);
+                    });
+            });
+        }
+        else{
+            socket.disconnect();
+
+        }
+
+
     });
     socket.on('disconnect',()=>console.log("ws client disconnected"));
 });
