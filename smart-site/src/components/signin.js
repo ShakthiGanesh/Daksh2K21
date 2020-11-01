@@ -19,8 +19,7 @@ export function SignIn () {
             },
             body : JSON.stringify({
                 email : email,
-                password : password,
-                group:"customer"
+                password : password
             }),
             credentials:'same-origin'
         })
@@ -69,7 +68,7 @@ export function SignIn () {
             <Route
                 render = {()=>(
                     <Redirect to={{
-                        pathname:'/'
+                        pathname:'/dashboard'
                     }}/>
                 )}
             />

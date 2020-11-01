@@ -14,6 +14,7 @@ const commonRoute = require('./routes/common');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+const User = require('./models/user');
 
 mongoose.connect('mongodb+srv://analytics:analytics-password@cluster0.ix2gk.mongodb.net/node?retryWrites=true&w=majority',{
     useNewUrlParser:true,

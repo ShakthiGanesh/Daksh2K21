@@ -1,7 +1,7 @@
 :root{
     --faded-font:rgb(238, 238, 238);
     --white-font:white;
-    --dark-brown-bg:#d38450;
+    --dark-brown-bg: #d38450;
 }
 .signin {
     width: 400px;

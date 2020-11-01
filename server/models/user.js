@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcryptjs');
 
 const userModel = new Schema({
     _id : Schema.Types.ObjectId,
@@ -22,9 +23,10 @@ const userModel = new Schema({
     mobile:Number
 },{collation:'users'});
 
-userModel.pre('save',async next=>{
-    this.password = await bcrypt.hash(this.password,process.env.SALT || 'secret_key');
-    next();
-});
+// userModel.pre('save',async next=>{
+//     // this.password = await bcrypt.hash(this.password,'$2b$10$SN5MRK.PivkVFa2Yi7gYIu');
+//     console.log(this)
+//     next();
+// });
 
 module.exports = mongoose.model('User',userModel);

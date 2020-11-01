@@ -1,9 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 const User = require('./models/user');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
-const user = require('./models/user');
 
 mongoose.connect('mongodb+srv://analytics:analytics-password@cluster0.ix2gk.mongodb.net/node?retryWrites=true&w=majority',{
     useNewUrlParser:true,
@@ -19,7 +18,7 @@ module.exports.authChecker = (req,res,next)=>{
         jwt.verify(token,process.env.SECRET_KEY || 'secret_key',(err,decoded)=>{
             User.findOne({_id:decoded.data.id})
             .then(user=>{
-                if(user.group==req.body.group)
+                if(user.group===req.body.group)
                     next();
                 else
                     res.status(401).json({error:"unauthenticated"});
@@ -45,7 +44,7 @@ module.exports.loginVerification = async (req,res,next)=>{
             const hashed = await bcrypt.hash(req.body.password, '$2b$10$SN5MRK.PivkVFa2Yi7gYIu');
             if(user.password === hashed){
                 res.cookie('jwt',await tokenizer({id:user._id,group:user.group}));
-                next(user.group);
+                next();
             }
             else
                 res.json({isAuthenticated:false,message:"Invalid password"});

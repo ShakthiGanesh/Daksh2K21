@@ -11,12 +11,14 @@ import { Plans } from './components/plans';
 import Contact from './components/contact';
 import AuthContextProvider from './public/authContext';
 import UserForm from "./components/userForm";
+import CustomerDashboard from "./components/customerDashboard";
 
 function App() {
   return (
     <div className="App">
-      <AuthContextProvider>
-      <Route path="/" exact>
+        <AuthContextProvider>
+
+        <Route path="/" exact>
         <Header />
         <Home />
         <Footer />
@@ -39,10 +41,14 @@ function App() {
         <Contact />
         <Footer />
       </Route>
-          <Route path='/u' exact>
-              <UserForm open={true} onCloseHandler={()=>console.log("Closed")}/>
-          </Route>
-      </AuthContextProvider>
+      <Route path='/u' exact>
+          <UserForm open={true} onCloseHandler={()=>console.log("Closed")}/>
+      </Route>
+        <Route path="/dashboard" exact>
+            <CustomerDashboard/>
+        </Route>
+        </AuthContextProvider>
+
     </div>
   );
 }

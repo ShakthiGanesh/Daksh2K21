@@ -51,8 +51,7 @@ class UserForm extends Component{
                 staff_id:this.state.staff_id,
                 department:this.state.department,
                 mobile:this.state.mobile
-            }),
-            credentials:'same-site'
+            })
         })
             .then(response => {
                 if(response.ok){
@@ -85,7 +84,7 @@ class UserForm extends Component{
         return(
             <>
                 <Snackbar
-                    anchorOrigin={{ vertical : "top" , horiontal : "center" }}
+                    // anchorOrigin="top"
                     autoHideDuration={ 10000 }
                     open={ this.state.error || this.state. success}
                     onClose={ () => this.setState( { success : false, error : false, toastMessage : '' } ) }
@@ -93,15 +92,15 @@ class UserForm extends Component{
                     <Alert severity={ this.state.error ? "error" : "success" }>{ this.state.toastMessage }</Alert>
                 </Snackbar>
                 <Dialog open={this.props.open} onClose={this.props.onCloseHandler}>
-                    <DialogTitle title="Create a new staff or user"/>
+                    <DialogTitle> Create a new staff or user</DialogTitle>
                     <Divider/>
                     <DialogContent>
-                        <Grid container alignItems="center" justify="center">
+                        <Grid container alignItems="center" justify="center" spacing={2}>
                             <Grid item xs={12}>
                                 <TextField fullWidth label="Name" value={this.state.name} onChange={e => this.setState({ name : e.target.value })}/>
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField fullWidth label="Email" type="email" value={ this.state.email } onChange={ e => this.setState({ email : e.target.valur })} />
+                                <TextField fullWidth label="Email" type="email" value={ this.state.email } onChange={ e => this.setState({ email : e.target.value })} />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField fullWidth label="Password" type="password" value={ this.state.password } onChange={ e => this.setState({ password : e.target.value })} />
