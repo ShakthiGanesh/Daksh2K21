@@ -56,6 +56,8 @@ router.get('/works/:projectid',(req,res)=>{
         }); }
 });
 
+router.get('/projects',)
+
 module.exports = router;
 
 

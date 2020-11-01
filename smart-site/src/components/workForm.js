@@ -1,7 +1,6 @@
 import { 
     TextField,
     Dialog,
-    DialogTitle,
     DialogContent,
     DialogActions,
     Select,
@@ -17,6 +16,7 @@ import {Alert} from '@material-ui/lab';
 import CloseIcon from '@material-ui/icons/Close';
 import React, {useState, useEffect, useRef} from 'react';
 import {BaseURL} from '../public/baseURL';
+import DialogContentText from "@material-ui/core/DialogContentText";
 
 export default function CreateWork(props){
     const [name,setName] = useState('');
@@ -87,22 +87,15 @@ export default function CreateWork(props){
             fullWidth={true}
             maxWidth="xs"
             >
-            <DialogTitle>
-                <Grid container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="center">
-                        <Typography variant="h5" component="h5">
-                            Create a new Work
-                        </Typography>
-                        <IconButton
-                            aria-label="close"
-                            onClick={()=>setOpen(false)}
-                            >
-                            <CloseIcon />
-                        </IconButton>
-                </Grid>
-            </DialogTitle>
+            <IconButton
+                aria-label="close"
+                onClick={()=>setOpen(false)}
+            >
+            <CloseIcon />
+            </IconButton>
+            <DialogContent>
+                Create a new Work
+            </DialogContent>
             <DialogContent
                 fullWidth={true}
                 maxWidth='xl'

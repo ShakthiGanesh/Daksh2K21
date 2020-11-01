@@ -12,8 +12,11 @@ import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from "@material-ui/core/ListItemText";
+import {CheckBox} from "@material-ui/icons";
+import Divider from "@material-ui/core/Divider";
+import Box from "@material-ui/core/Box";
+import Input from "@material-ui/core/Input";
 
 const styles =  () => ({
     appBar : {
@@ -55,6 +58,7 @@ class PlanForm extends Component {
         }
 
         this.dataFetcher = this.dataFetcher.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
 
     }
 
@@ -69,6 +73,34 @@ class PlanForm extends Component {
             .catch ( error => {
                 this.setState( { error : true, toastMessage : error.message } )
             })
+    }
+
+    handleSelect ( id ) {
+        let newList = this.state.selectedWorks;
+        if ( this.state.selectedWorks.has( id ) )
+            newList.delete( id );
+        else
+            newList.add( id );
+        this.setState({ selectedWorks: newList});
+    }
+
+    handleSubmit () {
+        let formData = new FormData();
+        formData.append( "name" , this.state.name );
+        formData.append( "works" , [...this.state.selectedWorks] );
+        formData.append( "imgNo" , this.state.images.length );
+        formData.append( "images" , this.state.images );
+
+        fetch( BaseURL + '/admin/plan' , {
+            method : "POST",
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : formData
+        })
+            .then( response => response.ok ? response.json() : throw new Error( { message : response.json }))
+            .then( response => this.setState( { success : true, toastMessage : response.message }))
+            .catch( error => this.setState( { error : true, toastMessage : error.message } ) )
     }
 
     render() {
@@ -89,57 +121,34 @@ class PlanForm extends Component {
                            <TextField label = "Name" value={ this.state.name } onChange={ e => this.setState( { name : e.target.name } ) } fullWidth={true}/>
                        </Grid>
                        <Grid item xs={12} md={6}>
-                           <TextField label={"Images"} value={ this.state.images } type = "file" onChange={ e => this.setState( {images : e.target.files } ) }/>
+                           <Input label={"Images"} value={ this.state.images } type = "file" onChange={ e => this.setState( {images : e.target.files } ) }/>
                        </Grid>
-                       <Grid item container spacing={2} xs={12}>
+                       <Grid item container spacing={4} xs={12}>
                             <Grid item xs={4}>
                                 <Paper className={classes.paper}>
                                     <List component={"div"} role={"list"}>
-                                        { this.state.availableWorks.map( work => {
-                                            <ListItem key={work._id} button role={"listitem"} onClick={ this.handleSelect(work._id) }>
+                                        { this.state.availableWorks.map ( work => (
+                                            <ListItem key={work._id} button onClick={ this.handleSelect(work._id) }>
                                                 <ListItemIcon>
-                                                    <Checkbox
-                                                        checked={this.state.checkedLeft.indexOf(work._id) !== -1}
+                                                    <CheckBox
+                                                        checked={ this.state.selectedWorks.has( work._id ) }
                                                         tabIndex={-1}
-                                                        disableRipple
                                                         />
                                                 </ListItemIcon>
-                                                <ListItemText primary={work.name}/>
+                                                <ListItemText primary={ work.name }/>
                                             </ListItem>
-                                        })}
-                                    </List>
-                                </Paper>
-                            </Grid>
-                           <Grid item>
-                               <Grid container direction={"column"} spacing={2} alignItems={"center"}>
-                                   <Button
-                                       variant={"outlined"}
-                                       onClick={handleAdd}
-                                       >&gt;</Button>
-                                   <Button
-                                       variant={"outlined"}
-                                       onClick={handleRemove}
-                                       >&lt;</Button>
-                               </Grid>
-                           </Grid>
-                           <Grid item xs={4}>
-                               <Paper className={classes.paper}>
-                                   <List component={"div"} role={"list"}>
-                                       { this.state.selectedWorks.map( work => {
-                                           <ListItem key={work._id} button role={"listitem"} onClick={ this.handleSelect(work._id) }>
-                                               <ListItemIcon>
-                                                   <Checkbox
-                                                       checked={this.state.checkedRight.indexOf(work._id) !== -1}
-                                                       tabIndex={-1}
-                                                       disableRipple
-                                                   />
-                                               </ListItemIcon>
-                                               <ListItemText primary={work.name}/>
-                                           </ListItem>
-                                       })}
+                                        ))}
                                    </List>
                                </Paper>
                            </Grid>
+                       </Grid>
+                       <Divider/>
+                       <Grid item >
+                           <Box display={"flex"} flexDirection={"row"} justifyContent={"flex-end"}>
+                               <Button onClick={ this.handleSubmit } color={"primary"} variant={"filled"}>
+                                   Submit
+                               </Button>
+                           </Box>
                        </Grid>
                    </Grid>
                </Dialog>

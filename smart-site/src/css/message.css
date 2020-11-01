@@ -1,0 +1,12 @@
+.message-left{
+    background-color:deepskyblue;
+    border-radius: 10px 10px 10px 0;
+    float : left;
+    padding : 20px;
+}
+.message-right{
+    background-color: lightgrey;
+    border-radius: 10px 10px 0 10px;
+    padding : 20px;
+    float : right;
+}

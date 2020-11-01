@@ -1,10 +1,11 @@
 const {Router} = require('express');
 const Department = require('../models/department');
 const {WorkTemplate, Plan} = require('../models/templates');
-const User = require*'../models/user';
+const User = require('../models/user');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const update = require('../aws');
+const bcrypt = require('bcryptjs');
 
 const router = Router();
 router.use(bodyParser.json());
@@ -136,10 +137,10 @@ router.route('/plan')
         })
         .catch(err=>res.status(500).json({error:err}));
     })
-    .post(update.single('image'),(res,req)=>{
+    .post(update.array('images'),(res,req)=>{
         Plan.update({_id:req.body._id},{$set:{
             name: res.body.name,
-            image : res.file.location
+            images : res.files.map( file => file.location)
         }})
         .then(()=>res.status(200).json({message:"Created plan"}))
         .catch(err=>res.status(500).json({error:err}));
@@ -152,9 +153,12 @@ router.get('/getDepartmentBasic',(req,res)=>{
         .catch( error => res.status(500).json({ message : error }));
 });
 
-router.post('/createUser', (req,res) => {
+router.post('/createUser', async (req,res) => {
     User.findOne( { email : req.body.email } )
-        .then ( user => res.status(400).json( { message : "A user with this email allready exists "}))
+        .then ( user => {
+            // res.status(400).json( { message : "A user with this email allready exists "})
+            console.log(user);
+        })
         .catch ( error => console.log(error.message));
 
     if ( req.body.group === "staff" ) {
@@ -163,15 +167,14 @@ router.post('/createUser', (req,res) => {
             .catch ( error => console.log(error.message));
     }
 
+    let pass = await bcrypt.hash(req.body.password,'$2b$10$SN5MRK.PivkVFa2Yi7gYIu');
     User.create( {
         _id : mongoose.Types.ObjectId(),
         name : req.body.name,
         email : req.body.email,
-        password : req.body.password,
+        password : pass,
         group : req.body.group,
-        staff_id : req.body.staff_id || null,
-        department : req.body.department || null,
-        mpbile : req.body.mobile || null
+        mobile : req.body.mobile || 0
     } )
         .then ( user => {
             if ( req.body.group === "staff" ) {
