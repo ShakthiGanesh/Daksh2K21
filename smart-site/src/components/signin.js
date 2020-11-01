@@ -21,7 +21,7 @@ export function SignIn () {
                 email : email,
                 password : password
             }),
-            credentials:'same-origin'
+            credentials:'include'
         })
         .then(response => {
             if (response.ok){

@@ -1,3 +1,6 @@
+body{
+    background-color: #f3ebe5;
+}
 .contact {
     display: flex;
     width: 900px;
@@ -7,6 +10,8 @@
     border-radius: 20px;
     box-shadow: 4px 7px 25px rgba(86, 85, 85, 0.2);
     font-family: 'Candara';
+    background-color: #f5f5f5;
+
 }
 
 

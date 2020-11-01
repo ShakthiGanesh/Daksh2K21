@@ -37,7 +37,7 @@ class Message extends Component {
     }
 
     dataFetch() {
-        fetch( BaseURL + 'common/message',{
+        fetch( BaseURL + '/common/message',{
             method : 'GET'
         })
             .then ( response => {
@@ -49,8 +49,8 @@ class Message extends Component {
             .catch( error => console.log(error.message) );
     }
 
-    messageUpdater () {
-        this.socket.emit('message',{ message : this.state.message });
+    messageUpdater (id) {
+        this.socket.emit('message',{ message : this.state.message , user_id : id});
         this.setState( { message : ''} );
     }
 
@@ -99,7 +99,7 @@ class Message extends Component {
                         <Box width={"80%"}>
                             <Input type={"text"} placeholder={"message"} value={this.state.message} onChange={e => this.setState({ message : e.target.value})}/>
                         </Box>
-                        <IconButton onClick={this.messageUpdater}>
+                        <IconButton onClick={()=>this.messageUpdater(user_id)}>
                             <SendRoundedIcon/>
                         </IconButton>
                     </Box>
